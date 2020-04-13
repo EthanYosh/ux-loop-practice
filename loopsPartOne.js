@@ -11,16 +11,7 @@
     Use a while loop to complete every exercise.
 */
 
-/*
-    Note, To run the tests for an exercise run the entire file!
-    Do not just highlight a section and try to run it, because the tests will
-    throw an exception 
-    ReferenceError: compareArray is not defined
 
-    If you see that exception, make sure you deselect any text and then click Run Code again
-
-    Remember to Save the file before you click Run Code!
-*/
 
 
 let arr = [];
@@ -52,7 +43,9 @@ for (let a of arr) {
 */
 
 function addExerciseToRoutine(routine, exercise, numRepetitions) {
-    // Your Code Here!
+    for (let i=0; i<numRepetitions; i++) {
+        routine.push(exercise);
+    }
 }
 
 /* 
@@ -103,7 +96,9 @@ function doAction(action) {
 */
 
 function performRoutine(routine) {
-    // Your Code Here!
+    for (let i=0; i<routine.length; i++) {
+        doAction(routine[i]);
+    }
 }
 
 /* 
@@ -144,7 +139,16 @@ console.log(compareArray(routineTwo, actionsPerformed));
 
 function countRepsOfActionInRoutine(routine, action) {
     let count = 0;
-    // Your Code Here!
+    for (let i=0; i<routine.length; i++) {
+
+        if (routine[i]===action) {
+            count++;
+
+        }
+        else {
+            continue;
+        }
+    }
     return count;
 }
 
@@ -197,7 +201,14 @@ console.log(countRepsOfActionInRoutine(routineThree, "crunch") == 0);
 */
 
 function removeExerciseFromRoutine(routine, exercise) {
-    // Your Code Here!
+    for (let i=0; i<routine.length; i++) {
+        if (routine[i] === exercise) {
+            routine.splice(i,1);
+            i--;
+        }
+
+    }
+    return routine;
 }
 
 

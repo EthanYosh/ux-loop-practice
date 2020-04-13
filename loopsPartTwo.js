@@ -1,19 +1,4 @@
-/*
-    Loops Practice - Part Two
 
-    Exercises Continued
-*/
-
-/*
-    Note, To run the tests for an exercise run the entire file!
-    Do not just highlight a section and try to run it, because the tests will
-    throw an exception 
-    ReferenceError: compareArray is not defined
-
-    If you see that exception, make sure you deselect any text and then click Run Code again
-
-    Remember to Save the file before you click Run Code!
-*/
 
 /* ---------------------------------------------------------------------------
     Exercise One
@@ -23,14 +8,16 @@
     Refactor your code from part one, but use the for loop instead of a while loop.
 */
 
+    // I already did a for loop in the first part
+
+
 function addExerciseToRoutineForLoop(routine, exercise, numRepetitions) {
-    // Your Code Here!  Use a For loop, not a for-of loop.
+    for (let i=0; i<numRepetitions; i++) {
+        routine.push(exercise);
+    }
 }
 
-/* 
-   -------TESTS---------------------------------------------------------------
-   Run these commands to make sure you did it right. They should all be true.
-*/
+
 console.log("-----Tests for Exercise One--For-Loop---");
 let routineOne = [];
 console.log("* Add Situps");
@@ -63,7 +50,17 @@ console.log(compareArray(routineOne, ["situp", "situp", "situp", "situp", "pushu
 function findMinimumAndMaximum(schedule) {
     let min = Number.POSITIVE_INFINITY;
     let max = 0;
-    // Your Code Here!
+
+    for (let i=0; i<schedule.length; i++) {
+
+        if (schedule[i]<min) {
+            min = Number(schedule[i]);
+        }
+
+        if (schedule[i]>max) {
+            max = Number(schedule[i]);
+        }
+    }
     return [min, max];
 }
 
@@ -103,7 +100,7 @@ console.log(result[0] == 0 && result[1] == 10);
     they devised a shorthand.
 
     Now they have started writing routines as a string like this:
-    let routineString = "20:situp|5:pushup|10:legraise|2:pullup";
+
     
     Each exercise is separate by a veritcal bar character |
 
@@ -129,12 +126,32 @@ console.log(result[0] == 0 && result[1] == 10);
     Then you can access the individual parts by doing parts[0], etc...
 
     Hint2: This may require a two dimensional loop!
+    let routineString = "20:situp|5:pushup|10:legraise|2:pullup";
 */
 
 function convertRoutineFromNewFormat(routineString) {
-    let routine = [];
-    // Your Code Here!
-    return routine;
+    let routinePOST = [];
+    let item2 = ":";
+
+    let routinePRE = routineString.split("|");
+    let PRElength = routinePRE.length
+
+
+    for (let i=0; i<PRElength; i++) {
+        let arrayIndex = routinePRE[i].toString();
+        for (let ii=0; ii<arrayIndex.length; ii++) {
+
+            if (arrayIndex.charAt(ii)==item2) {
+                let number = parseInt(arrayIndex.slice(0,ii), 10);
+    
+                while (number>0) {
+                    routinePOST.push(arrayIndex.slice(ii+1,arrayIndex.length));
+                    number--;
+                }
+            }       
+        }
+    }
+    return routinePOST;
 }
 
 /* 
@@ -151,6 +168,7 @@ console.log(compareArray(routineThree, [
     "legraise", "legraise", "legraise",
     "pullup", "pullup"
 ]));
+console.log(routineThree);
 
 
 console.log("* Perform Routine with empty exercise");
@@ -202,7 +220,45 @@ console.log(compareArray(routineThree, [
 
 function calculateRoutineDifficulty(routine) {
     let difficulty = "";
-    // Your Code Here!
+    let counter = 0;
+
+    for (let i=0; i<routine.length; i++) {
+
+        if (routine[i] == "situp") {
+            counter+=1;
+            continue;
+        }
+
+        if (routine[i] == "legraise") {
+            counter+=2;
+            continue;
+        }
+
+        if (routine[i] == "pushup") {
+            counter+=4;
+            continue;
+        }
+
+        if (routine[i] == "pullup") {
+            counter+=10;
+            continue;
+        }
+
+
+    }
+
+    if (counter < 30) {
+        difficulty = "Easy";
+    }
+
+    else if (counter > 59) {
+        difficulty = "Insane";
+    }
+
+    else {
+        difficulty = "Hard";
+    }
+
     return difficulty;
 }
 
